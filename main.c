@@ -60,12 +60,11 @@ Serial.println(ps2x.Analog(PSAB_PAD_LEFT), DEC);
 spin_L( a , se); //右輪前轉， 左輪 後傳
 }
 if(ps2x.Button(PSB_PAD_DOWN)){ //十字方向，下
-Serial.print("DOWN held this hard: ";
+Serial.print("DOWN held this hard: ");
 Serial.println(ps2x.Analog(PSAB_PAD_DOWN), DEC);
 back(a+150 , se); //左右輪子 後轉
 }
-if(ps2x.NewButtonState(PSB_L3)) //L3鍵，NewButtonState按下不管多久只會觸
-發兩次(按下和放開)
+if(ps2x.NewButtonState(PSB_L3)) //L3鍵，NewButtonState按下不管多久只會觸發兩次(按下和放開)
 Serial.println("L3 pressed");
 if(ps2x.NewButtonState(PSB_R3)) //R3鍵
 Serial.println("R3 pressed stop");
@@ -88,18 +87,16 @@ if(ps2x.NewButtonState(PSB_SQUARE)){ //方型按鍵
 Serial.println("Square pressed");
 }
 //讀取顯示兩個搖桿（香菇頭）的數值
-//請注意 操作要求： 必須同時 按下“L1”或“R1” 其中的一個鍵，搖動香菇頭搖
-桿 才能讀到搖桿的數值
-if(ps2x.Button(PSB_L1) || ps2x.Button(PSB_R1)) { //按下L1或L2鍵，顯示兩個香
-菇頭的數值
+//請注意 操作要求： 必須同時 按下“L1”或“R1” 其中的一個鍵，搖動香菇頭搖桿 才能讀到搖桿的數值
+if(ps2x.Button(PSB_L1) || ps2x.Button(PSB_R1)) { //按下L1或L2鍵，顯示兩個香菇頭的數值
 Serial.print("Stick Values:");
 Serial.print(ps2x.Analog(PSS_LY), DEC); //左，上下
-if(ps2x.Analog(PSS_LY)&lt;100) advance( a , se);
-if(ps2x.Analog(PSS_LY)&gt;150) back( a , se);
+if(ps2x.Analog(PSS_LY)<100) advance( a , se);
+if(ps2x.Analog(PSS_LY)>150) back( a , se);
 Serial.print(",");
 Serial.print(ps2x.Analog(PSS_LX), DEC); //左，左右
-if(ps2x.Analog(PSS_LX)&lt;30) turn_L( a , se);
-if(ps2x.Analog(PSS_LX)&gt;220) turn_R( a , se);
+if(ps2x.Analog(PSS_LX)<30) turn_L( a , se);
+if(ps2x.Analog(PSS_LX)>220) turn_R( a , se);
 Serial.print(",");
 Serial.print(ps2x.Analog(PSS_RY), DEC); //右，上下
 Serial.print(",");
